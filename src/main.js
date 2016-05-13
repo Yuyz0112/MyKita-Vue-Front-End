@@ -4,10 +4,12 @@ import VueRouter from 'VueRouter'
 import store from './vuex/store'
 
 Vue.use(VueRouter)
-const router = new VueRouter()
+const router = new VueRouter({
+  linkActiveClass: 'is-active'
+})
 
 router.map({
-  '/': {
+  '/home': {
     component: resolve => require(['./components/Index'], resolve)
   },
   '/login': {

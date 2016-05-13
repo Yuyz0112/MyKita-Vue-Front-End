@@ -7,13 +7,13 @@
         </a>
       </div>
       <div class="nav-right">
-        <a v-for="item of navItems" class="nav-item is-tab" v-link="{ path: item.link, exact: true, activeClass: 'is-active' }">{{ item.name }}</a>
+        <a v-for="item of navItems" class="nav-item is-tab" v-link="{ path: item.link }">{{ item.name }}</a>
       </div>
     </div>
   </nav>
   <nav class="nav fixed nav-mobile" v-else>
     <div class="nav-left columns">
-      <a v-for="item of navItems" class="nav-item is-tab column" v-link="{ path: item.link, exact: true, activeClass: 'is-active' }">{{ item.name }}</a>
+      <a v-for="item of navItems" class="nav-item is-tab column" v-link="{ path: item.link }">{{ item.name }}</a>
     </div>
   </nav>
 </template>
@@ -23,7 +23,7 @@ export default {
   data () {
     return {
       navItems: [
-        {name: '首页', link: '/'},
+        {name: '首页', link: '/home'},
         {name: '找投资人', link: '/list1'},
         {name: '找项目', link: '/list2'},
         {name: '登陆 / 注册', link: '/login'}

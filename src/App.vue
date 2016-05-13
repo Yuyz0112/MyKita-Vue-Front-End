@@ -45,4 +45,11 @@ export default {
 
   section.hero.is-fullheight
     background: none
+
+  .slide-in-transition
+    transition : all .5s ease
+    right:0 !important
+
+  .slide-in-enter, .slide-in-leave
+    right:-10% !important
 </style>

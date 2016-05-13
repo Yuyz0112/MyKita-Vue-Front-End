@@ -1,22 +1,22 @@
 <template>
   <div class="container columns">
-    <div class="column" :class="mobile? 'mobileClass':'desktopClass'">
+    <div class="column is-fullheight" :class="mobile? 'mobileClass':'desktopClass'">
       <div class="box">
         <article class="media">
           <div class="media-left">
             <figure>
-              <img src="../assets/avator.png">
+              <img class="image" :class="mobile? 'is-96x96':'is-64x64'" src="../assets/heart.gif">
             </figure>
           </div>
           <div class="media-content">
             <div class="content">
-              <p><strong>{{ name }}</strong></p>
+              <p><strong>{{ authData.name }}</strong></p>
             </div>
             <nav class="level is-mobile">
-              <div class="level-item has-text-centered">
+              <div class="level-item">
                 <a v-link="'/customer/info'" @click="i = -1">完善资料</a>
               </div>
-              <div class="level-item has-text-centered">
+              <div class="level-item">
                 <a v-link="'/customer'" @click="i = -1">个人设置</a>
               </div>
             </nav>
@@ -26,17 +26,29 @@
       <aside class="menu">
         <ul class="menu-list">
           <li v-for="list of lists">
-            <a v-link="list.link" :class="$index === i? 'is-active':''" @click="i = $index">{{ list.name }}</a>
+            <a v-link="{ path: list.link, replace: true }" :class="$index === i? 'is-active':''" @click="i = $index">{{ list.name }}</a>
           </li>
         </ul>
       </aside>
     </div>
 
-    <div class="column">
+    <div class="column" v-if="!mobile">
       <router-view></router-view>
       <h1 class="title">Is this a mobile device? {{ mobile }}</h1>
       <a class="button is-primary is-outlined" @click="logout">登出</a>
     </div>
+    <section v-else class="hero is-success is-fullheight" id="subview">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            Full Height title
+          </h1>
+          <h2 class="subtitle">
+            Full Height subtitle
+          </h2>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -55,15 +67,14 @@ export default {
         {name: '我管理的公司', link: ''},
         {name: '我关注的公司', link: ''}
       ],
-      i: -1,
-      infoComplete: ''
+      i: -1
     }
   },
   vuex: {
     getters: {
       session: state => state.session,
       mobile: state => state.mobile,
-      name: state => state.authData.name
+      authData: state => state.authData
     },
     actions: {
       sessionClear: logout,
@@ -82,15 +93,24 @@ export default {
       if (val !== true) {
         this.$route.router.go('/')
       }
-    },
-    infoComplete (val) {
-      if (val !== '') {
-        this.notice({
-          show: true,
-          color: 'is-info',
-          msg: '请完善您的资料'
-        })
+    }
+  },
+  computed: {
+    show () {
+      if (this.i !== -1) {
+        return true
+      } else {
+        return false
       }
+    }
+  },
+  ready () {
+    if (this.authData.avator === undefined) {
+      this.notice({
+        show: true,
+        color: 'is-info',
+        msg: '请完善您的资料'
+      })
     }
   }
 }
@@ -111,4 +131,10 @@ export default {
     padding: 10px
     li
       margin: 10px 0
+  .media
+    align-items: center
+  #subview
+    position: absolute
+    top: 0
+    right: 0
 </style>
