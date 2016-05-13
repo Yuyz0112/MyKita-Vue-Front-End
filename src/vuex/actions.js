@@ -47,3 +47,11 @@ export const check = ({dispatch}) => {
 export const logout = ({dispatch}) => {
   dispatch('LOG_OUT')
 }
+
+export const closeNotice = ({dispatch}) => {
+  dispatch('CLOSE_NOTICE')
+}
+
+export const newNotice = ({dispatch}, notice) => {
+  dispatch('NEW_NOTICE', notice)
+}

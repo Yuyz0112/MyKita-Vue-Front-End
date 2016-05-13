@@ -12,6 +12,11 @@ const state = {
     email: '',
     id: '',
     name: ''
+  },
+  notice: {
+    show: false,
+    color: '',
+    msg: ''
   }
 }
 
@@ -25,6 +30,12 @@ const mutations = {
   },
   IS_MOBILE (state) {
     state.mobile = true
+  },
+  CLOSE_NOTICE (state) {
+    state.notice.show = false
+  },
+  NEW_NOTICE (state, notice) {
+    state.notice = notice
   }
 }
 

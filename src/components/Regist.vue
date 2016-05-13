@@ -45,14 +45,11 @@
         </div>
       </div>
     </div>
-    <div class="hero-foot">
-      <h2 class="title">footer</h2>
-    </div>
   </section>
 </template>
 
 <script>
-import { login } from '../vuex/actions'
+import { login, newNotice } from '../vuex/actions'
 import user from '../api/user'
 
 export default {
@@ -95,22 +92,34 @@ export default {
   },
   vuex: {
     actions: {
-      session: login
+      session: login,
+      notice: newNotice
     }
   },
   methods: {
     regist () {
       if (this.emailValid !== '' || this.passwordValid !== '' || this.checkValid !== '') {
-        console.log('error!')
-        return false
-      } else if (this.passwordCheck === '') {
-        console.log('请确认密码')
-        return false
-      } else if (this.name === '') {
-        console.log('请输入姓名')
         return false
       } else if (this.email === '') {
-        console.log('请输入邮箱')
+        this.notice({
+          show: true,
+          color: 'is-danger',
+          msg: '请输入邮箱'
+        })
+        return false
+      } else if (this.passwordCheck === '') {
+        this.notice({
+          show: true,
+          color: 'is-danger',
+          msg: '请确认密码'
+        })
+        return false
+      } else if (this.name === '') {
+        this.notice({
+          show: true,
+          color: 'is-danger',
+          msg: '请输入姓名'
+        })
         return false
       }
       this.loading = 'is-loading'
@@ -120,7 +129,11 @@ export default {
           this.session(val)
           this.$route.router.go('/customer')
         } else {
-          console.log(val)
+          this.notice({
+            show: true,
+            color: 'is-danger',
+            msg: val.responseText
+          })
         }
       })
     },

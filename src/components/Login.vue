@@ -30,14 +30,11 @@
         </div>
       </div>
     </div>
-    <div class="hero-foot">
-      <h2 class="title">footer</h2>
-    </div>
   </section>
 </template>
 
 <script>
-import { login } from '../vuex/actions'
+import { login, newNotice } from '../vuex/actions'
 import user from '../api/user'
 
 export default {
@@ -68,7 +65,8 @@ export default {
   },
   vuex: {
     actions: {
-      session: login
+      session: login,
+      notice: newNotice
     }
   },
   methods: {
@@ -78,7 +76,11 @@ export default {
           this.session(val)
           this.$route.router.go('/customer')
         } else {
-          console.log(val)
+          this.notice({
+            show: true,
+            color: 'is-danger',
+            msg: `错误：${val.responseText}`
+          })
         }
       })
     }

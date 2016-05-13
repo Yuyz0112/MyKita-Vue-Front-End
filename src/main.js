@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import VueRouter from 'VueRouter'
+import store from './vuex/store'
 
 Vue.use(VueRouter)
 const router = new VueRouter()
@@ -18,6 +19,9 @@ router.map({
   '/customer': {
     component: resolve => require(['./components/Customer'], resolve),
     subRoutes: {
+      '/': {
+        component: resolve => require(['./components/Navbar'], resolve)
+      },
       '/1': {
         component: resolve => require(['./components/Counter'], resolve)
       },
@@ -26,6 +30,11 @@ router.map({
       }
     }
   }
+})
+
+router.beforeEach(({to, next}) => {
+  store.dispatch('CLOSE_NOTICE')
+  next()
 })
 
 router.start(App, 'app')

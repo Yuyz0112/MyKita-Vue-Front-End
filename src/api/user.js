@@ -1,5 +1,4 @@
 import reqwest from 'reqwest'
-console.log(reqwest)
 
 const domain = 'http://120.27.38.129:1337/user/'
 const apis = {
