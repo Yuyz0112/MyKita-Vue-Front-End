@@ -11,7 +11,7 @@
       </div>
     </div>
   </nav>
-  <nav class="nav fixed nav-mobile" v-else>
+  <nav class="nav has-shadow fixed nav-mobile" v-else>
     <div class="nav-left columns">
       <a v-for="item of navItems" class="nav-item is-tab column" v-link="{ path: item.link }">{{ item.name }}</a>
     </div>

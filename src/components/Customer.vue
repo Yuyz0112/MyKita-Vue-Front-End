@@ -14,10 +14,7 @@
             </div>
             <nav class="level is-mobile">
               <div class="level-item">
-                <a v-link="'/customer/info'" @click="i = -1">完善资料</a>
-              </div>
-              <div class="level-item">
-                <a v-link="'/customer'" @click="i = -1">个人设置</a>
+                <a v-link="'/customer/info'" @click="activeInfo">完善资料</a>
               </div>
             </nav>
           </div>
@@ -26,30 +23,42 @@
       <aside class="menu">
         <ul class="menu-list">
           <li v-for="list of lists">
-            <a v-link="{ path: list.link, replace: true }" :class="$index === i? 'is-active':''" @click="i = $index">{{ list.name }}</a>
+            <a v-link="{ path: list.link, replace: true }" :class="$index === i? 'is-active':''" @click="active($index)">{{ list.name }}</a>
           </li>
         </ul>
+        <p class="menu-label has-text-centered"><a class="button is-primary is-outlined" @click="logout">退出登陆</a></p>
       </aside>
     </div>
 
     <div class="column" v-if="!mobile">
-      <router-view></router-view>
-      <h1 class="title">Is this a mobile device? {{ mobile }}</h1>
-      <a class="button is-primary is-outlined" @click="logout">登出</a>
-    </div>
-    <section v-else class="hero is-success is-fullheight" id="subview">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">
-            Full Height title
-          </h1>
-          <h2 class="subtitle">
-            Full Height subtitle
-          </h2>
-        </div>
+      <div class="card is-fullwidth">
+        <header class="card-header">
+          <p class="card-header-title">
+            {{ subview.title }}
+          </p>
+        </header>
+        <div class="card-content">
+          <router-view></router-view>
+        </div><!-- 
+        <footer class="card-footer">
+          <a class="card-footer-item">Save</a>
+          <a class="card-footer-item">Edit</a>
+          <a class="card-footer-item">Delete</a>
+        </footer> -->
       </div>
-    </section>
+    </div>
   </div>
+
+  <section v-if="mobile" class="is-overlay" id="subview" :class="subview.show? 'show':''">
+    <nav class="nav has-shadow">
+      <div class="nav-left">
+        <i class="fa fa-close" @click="subview.show = false">X</i>
+        <h2>{{ subview.title }}</h2>
+      </div>
+    </nav>
+    <router-view></router-view>
+  </section>
+
 </template>
 
 <script>
@@ -67,7 +76,11 @@ export default {
         {name: '我管理的公司', link: ''},
         {name: '我关注的公司', link: ''}
       ],
-      i: -1
+      i: -1,
+      subview: {
+        show: false,
+        title: '我的资料'
+      }
     }
   },
   vuex: {
@@ -86,12 +99,27 @@ export default {
       user.logout(() => {
         this.sessionClear()
       })
+    },
+    active (index) {
+      this.i = index
+      this.subview = {
+        show: true,
+        title: this.lists[index].name
+      }
+    },
+    activeInfo () {
+      this.i = -1
     }
   },
   watch: {
     session (val) {
       if (val !== true) {
         this.$route.router.go('/')
+      }
+    },
+    i (val) {
+      if (val === -1) {
+        this.subview.title = '我的资料'
       }
     }
   },
@@ -112,6 +140,15 @@ export default {
         msg: '请完善您的资料'
       })
     }
+  },
+  route: {
+    data (transition) {
+      if (this.$route.path === '/customer') {
+        transition.next({
+          i: -1
+        })
+      }
+    }
   }
 }
 </script>
@@ -126,15 +163,38 @@ export default {
     padding: 10px
   .menu
     background: #fff
-    border-radius: 5px
-    box-shadow: 0 2px 3px rgba(17, 17, 17, 0.1), 0 0 0 1px rgba(17, 17, 17, 0.1);
+    box-shadow: 0 2px 3px rgba(17, 17, 17, 0.1), 0 0 0 1px rgba(17, 17, 17, 0.1)
     padding: 10px
     li
       margin: 10px 0
+    .menu-label
+      border-top: 2px solid rgba(17, 17, 17, 0.1)
+      .button
+        margin-top: 10px
+        width: 100%
   .media
     align-items: center
+  .card-content
+    padding-top: 1px
+    padding-bottom: 0
   #subview
     position: absolute
     top: 0
-    right: 0
+    left: 0
+    transform: translate3d(-105%, 0 , 0)
+    width: 100%
+    background: #f1f3f5
+    z-index: 2
+    transition: .5s ease
+    &.show
+      transform: translate3d(0, 0 , 0)
+    nav
+      background: #fff
+      color: #212121
+      margin-bottom: 20px
+      i
+        position: absolute
+        left: 0
+      h2
+        margin: 0 auto
 </style>

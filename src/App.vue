@@ -42,6 +42,7 @@ export default {
     background: url(http://www.ssyer.com/uploads/org_20160506162727_896.jpg)
     background-size: cover
     background: #f1f3f5
+    position: relative
 
   section.hero.is-fullheight
     background: none

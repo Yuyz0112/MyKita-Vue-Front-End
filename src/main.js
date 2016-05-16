@@ -22,13 +22,16 @@ router.map({
     component: resolve => require(['./components/Customer'], resolve),
     subRoutes: {
       '/': {
-        component: resolve => require(['./components/Navbar'], resolve)
+        component: resolve => require(['./components/InfoPanel'], resolve)
       },
       '/1': {
         component: resolve => require(['./components/Counter'], resolve)
       },
       '/2': {
         component: resolve => require(['./components/Hello'], resolve)
+      },
+      '/info': {
+        component: resolve => require(['./components/InfoPanel'], resolve)
       }
     }
   }
@@ -37,6 +40,10 @@ router.map({
 router.beforeEach(({to, next}) => {
   store.dispatch('CLOSE_NOTICE')
   next()
+})
+
+router.redirect({
+  '/': '/home'
 })
 
 router.start(App, 'app')
