@@ -52,7 +52,7 @@
   <section v-if="mobile" class="is-overlay" id="subview" :class="subview.show? 'show':''">
     <nav class="nav has-shadow">
       <div class="nav-left">
-        <i class="fa fa-close" @click="subview.show = false">X</i>
+        <i class="fa fa-back" @click="subview.show = false">《=</i>
         <h2>{{ subview.title }}</h2>
       </div>
     </nav>
@@ -109,6 +109,7 @@ export default {
     },
     activeInfo () {
       this.i = -1
+      this.subview.show = true
     }
   },
   watch: {

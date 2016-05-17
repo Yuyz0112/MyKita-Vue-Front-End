@@ -4,7 +4,7 @@
     <div class="padding">
       <notification :color="notice.color" v-if="notice.show">{{ notice.msg }}</notification>
       <router-view></router-view>
-      <div class="hero-foot">
+      <div class="hero-foot" id="footer">
         <h2 class="title">footer</h2>
       </div>
     </div>
@@ -43,6 +43,9 @@ export default {
     background-size: cover
     background: #f1f3f5
     position: relative
+
+  #footer
+    height: 100px
 
   section.hero.is-fullheight
     background: none

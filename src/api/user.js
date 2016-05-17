@@ -60,5 +60,20 @@ export default {
     .catch((e) => {
       return false
     })
+  },
+
+  update (id, data, callback) {
+    reqwest({
+      url: domain + id,
+      crossOrigin: true,
+      withCredentials: true,
+      method: 'PUT',
+      data: data
+    })
+    .then((res) => {
+      return res
+    })
+    .then(val => callback(val))
+    .catch(e => callback(e))
   }
 }
