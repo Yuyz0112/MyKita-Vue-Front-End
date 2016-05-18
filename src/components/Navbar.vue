@@ -25,7 +25,7 @@ export default {
       navItems: [
         {name: '首页', link: '/home'},
         {name: '找投资人', link: '/list1'},
-        {name: '找项目', link: '/list2'},
+        {name: '找项目', link: '/company'},
         {name: '登陆 / 注册', link: '/login'}
       ]
     }

@@ -73,7 +73,7 @@ export default {
     .then((res) => {
       return res
     })
-    .then(val => callback(val))
+    .then(val => callback(null))
     .catch(e => callback(e))
   }
 }

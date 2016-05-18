@@ -36,6 +36,9 @@ const mutations = {
   },
   NEW_NOTICE (state, notice) {
     state.notice = notice
+  },
+  UPDATE_AUTHDATA (state, type, val) {
+    Vue.set(state.authData, type, val)
   }
 }
 

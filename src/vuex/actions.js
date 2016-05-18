@@ -55,3 +55,7 @@ export const closeNotice = ({dispatch}) => {
 export const newNotice = ({dispatch}, notice) => {
   dispatch('NEW_NOTICE', notice)
 }
+
+export const updateAuthdata = ({dispatch}, type, val) => {
+  dispatch('UPDATE_AUTHDATA', type, val)
+}

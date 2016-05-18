@@ -34,6 +34,12 @@ router.map({
         component: resolve => require(['./components/InfoPanel'], resolve)
       }
     }
+  },
+  '/company/list': {
+    component: resolve => require(['./components/Hello'], resolve)
+  },
+  '/company/:cid': {
+    component: resolve => require(['./components/Company'], resolve)
   }
 })
 
@@ -43,7 +49,8 @@ router.beforeEach(({to, next}) => {
 })
 
 router.redirect({
-  '/': '/home'
+  '/': '/home',
+  '/company': '/company/list'
 })
 
 router.start(App, 'app')

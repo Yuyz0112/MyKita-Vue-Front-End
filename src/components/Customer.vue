@@ -14,7 +14,7 @@
             </div>
             <nav class="level is-mobile">
               <div class="level-item">
-                <a v-link="'/customer/info'" @click="activeInfo">完善资料</a>
+                <a v-link="'/customer/info'" @click="activeInfo">{{ info }}</a>
               </div>
             </nav>
           </div>
@@ -131,15 +131,18 @@ export default {
       } else {
         return false
       }
-    }
-  },
-  ready () {
-    if (this.authData.avator === undefined) {
-      this.notice({
-        show: true,
-        color: 'is-info',
-        msg: '请完善您的资料'
-      })
+    },
+    info () {
+      if (this.authData.maintain === undefined && this.authData.id !== '') {
+        this.notice({
+          show: true,
+          color: 'is-info',
+          msg: '请完善您的资料'
+        })
+        return '完善资料'
+      } else {
+        return '修改资料'
+      }
     }
   },
   route: {

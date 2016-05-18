@@ -27,3 +27,8 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="sass">
+  .notification
+    z-index: 3
+</style>
