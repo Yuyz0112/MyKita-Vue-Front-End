@@ -36,7 +36,7 @@ router.map({
     }
   },
   '/company/list': {
-    component: resolve => require(['./components/Hello'], resolve)
+    component: resolve => require(['./components/Loader'], resolve)
   },
   '/company/:cid': {
     component: resolve => require(['./components/Company'], resolve)

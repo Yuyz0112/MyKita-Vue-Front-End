@@ -39,12 +39,7 @@
         </header>
         <div class="card-content">
           <router-view></router-view>
-        </div><!-- 
-        <footer class="card-footer">
-          <a class="card-footer-item">Save</a>
-          <a class="card-footer-item">Edit</a>
-          <a class="card-footer-item">Delete</a>
-        </footer> -->
+        </div>
       </div>
     </div>
   </div>

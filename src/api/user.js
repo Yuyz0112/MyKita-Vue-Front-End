@@ -15,9 +15,6 @@ export default {
       crossOrigin: true,
       withCredentials: true
     })
-    .then((res) => {
-      return res
-    })
     .then(val => callback(val))
     .catch(e => callback(false))
   },
@@ -28,9 +25,6 @@ export default {
       crossOrigin: true,
       withCredentials: true
     })
-    .then((res) => {
-      return res
-    })
     .then(val => callback(val))
     .catch(e => callback(e))
   },
@@ -40,9 +34,6 @@ export default {
       url: apis.signup + params,
       crossOrigin: true,
       withCredentials: true
-    })
-    .then((res) => {
-      return res
     })
     .then(val => callback(val))
     .catch(e => callback(e))
@@ -69,9 +60,6 @@ export default {
       withCredentials: true,
       method: 'PUT',
       data: data
-    })
-    .then((res) => {
-      return res
     })
     .then(val => callback(null))
     .catch(e => callback(e))
