@@ -6,6 +6,7 @@
       <div class="container">
         <h1 class="title has-text-centered">session status: {{ session }}</h1>
         <p>Github address: https://github.com/Yuyz0112/MyKita-Vue-Front-End</p>
+        <p>MyKita</p>
       </div>
     </div>
     <div class="hero-foot">
