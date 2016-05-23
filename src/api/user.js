@@ -1,6 +1,6 @@
 import reqwest from 'reqwest'
 
-const domain = 'http://120.27.38.129:1337/user/'
+const domain = 'https://sails.myriptide.com/user/'
 const apis = {
   login: domain + 'login',
   logout: domain + 'logout',

@@ -25,7 +25,7 @@
 
 <script>
 import reqwest from 'reqwest'
-const domain = 'http://120.27.38.129:1337/company/'
+const domain = 'https://sails.myriptide.com/company/'
 
 export default {
   data () {
