@@ -4,9 +4,9 @@
     <div class="padding">
       <notification :color="notice.color" v-if="notice.show">{{ notice.msg }}</notification>
       <router-view></router-view>
-      <div class="hero-foot" id="footer">
-        <h2 class="title">footer</h2>
-      </div>
+    </div>
+    <div class="hero-foot" id="footer">
+      <h2 class="title">footer</h2>
     </div>
   </div>
 </template>
@@ -37,23 +37,36 @@ export default {
 <style lang="sass">
   @import "./assets/bulma.sass"
 
+  html, body, #app
+    height: 100%
+
   .padding
     padding-top: $nav-height
     background: url(http://www.ssyer.com/uploads/org_20160506162727_896.jpg)
     background-size: cover
     background: #f1f3f5
     position: relative
+    min-height: 100%
 
   #footer
     height: 100px
+    background: rgba(17, 200, 131, .5)
 
   section.hero.is-fullheight
     background: none
 
-  .slide-in-transition
-    transition : all .5s ease
-    right:0 !important
+  .fade-transition
+    opacity: 1
 
-  .slide-in-enter, .slide-in-leave
-    right:-10% !important
+  .fade-enter
+    animation: fade-in 1s;
+
+  .fade-leave
+    opacity: 0
+
+  @keyframes fade-in 
+    from
+      opacity: 0
+    to
+      opacity: 1
 </style>

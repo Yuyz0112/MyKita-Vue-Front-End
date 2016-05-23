@@ -19,21 +19,23 @@ export default {
     .catch(e => callback(false))
   },
 
-  login (params, callback) {
+  login (data, callback) {
     reqwest({
-      url: apis.login + params,
+      url: apis.login,
       crossOrigin: true,
-      withCredentials: true
+      withCredentials: true,
+      data: data
     })
     .then(val => callback(val))
     .catch(e => callback(e))
   },
 
-  signup (params, callback) {
+  signup (data, callback) {
     reqwest({
-      url: apis.signup + params,
+      url: apis.signup,
       crossOrigin: true,
-      withCredentials: true
+      withCredentials: true,
+      data: data
     })
     .then(val => callback(val))
     .catch(e => callback(e))

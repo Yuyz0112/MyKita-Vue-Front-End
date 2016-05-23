@@ -123,7 +123,12 @@ export default {
         return false
       }
       this.loading = 'is-loading'
-      user.signup(`?email=${this.email}&password=${this.password}&role=${this.role}&name=${this.name}`, (val) => {
+      user.signup({
+        email: this.email,
+        password: this.password,
+        role: this.role,
+        name: this.name
+      }, (val) => {
         this.loading = ''
         if (val.id !== undefined && val !== undefined) {
           this.session(val)

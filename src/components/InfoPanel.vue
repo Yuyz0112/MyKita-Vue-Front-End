@@ -116,7 +116,10 @@ export default {
       if (this.modal.update) {
         // update
         if (this.modal.type === 'password') {
-          user.login(`?email=${this.authData.email}&password=${this.modal.oldPassword}`, (val) => {
+          user.login({
+            email: this.authData.email,
+            password: this.modal.oldPassword
+          }, (val) => {
             if (val.id !== undefined && val !== undefined) {
               user.update(this.authData.id, data, (err) => {
                 if (err) {

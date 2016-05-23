@@ -59,6 +59,8 @@ export default {
 <style lang="sass" scoped>
   .fixed 
     position: fixed
+    top: 0
+    left: 0
     width: 100%
   .nav-mobile .columns
     margin: 0

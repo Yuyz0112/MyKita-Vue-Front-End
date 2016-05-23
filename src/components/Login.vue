@@ -71,7 +71,10 @@ export default {
   },
   methods: {
     logIn () {
-      user.login(`?email=${this.email}&password=${this.password}`, (val) => {
+      user.login({
+        email: this.email,
+        password: this.password
+      }, (val) => {
         if (val.id !== undefined && val !== undefined) {
           this.session(val)
           this.$route.router.go('/customer')
