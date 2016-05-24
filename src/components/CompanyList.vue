@@ -11,7 +11,7 @@
           <div class="media-content">
             <div class="content">
               <p>
-                <strong><a v-link="{ path: `/company/${company.id}` }">{{ company.name }}</a></strong>
+                <strong><a v-link="{ path: '/company/' + company.id }">{{ company.name }}</a></strong>
                 <small>@{{ maintains[company.defaultTag] }}</small>
                 <br>
                 {{ company.slogan }}
