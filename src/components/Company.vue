@@ -24,12 +24,58 @@
     </div>
   </section>
   <div v-if="loaded" class="container has-text-centered" id="content" transition="fade">
-    <h3 class="title intro">公司介绍</h3>
-    <div class="intro has-text-left">
-      <p>{{ company.intro }}</p>
+    <div v-if="company.intro">
+      <h3 class="title intro">公司介绍</h3>
+      <div class="intro has-text-left">
+        <p>{{ company.intro }}</p>
+      </div>
     </div>
-    <h3 class="title intro">图片展示</h3>
-    <slider :images="company.images"></slider>
+    <div class="columns">
+      <div class="column" v-if="company.images">
+        <h3 class="title intro">图片展示</h3>
+        <slider :images="company.images"></slider>
+      </div>
+      <div class="column" v-if="company.timeline">
+        <h3 class="title intro">重要动态</h3>
+        <timeline :timeline="company.timeline"></timeline>
+      </div>
+    </div>
+    <div v-if="company.products">
+      <h3 class="title intro">产品链接</h3>
+      <div class="has-text-centered">
+        <figure v-for="bicode of company.products.bicodes" class="image is-128x128 product">
+          <img :src="bicode">
+        </figure>
+        <p v-for="link of company.products.links">
+          <a :href="link.url" target="_blank">{{ link.desc }}</a>
+        </p>
+      </div>
+    </div>
+    <div v-if="company.teamIntro">
+      <h3 class="title intro">团队介绍</h3>
+      <div class="intro has-text-left">
+        <p>{{ company.teamIntro }}</p>
+      </div>
+    </div>
+    <h3 class="title intro" v-if="company.teamMembers.length > 0">团队成员</h3>
+    <div class="columns">
+      <div class="column" v-for="member of company.teamMembers">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image">
+              <img src="../assets/heart.gif">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="content">
+              <p class="title">{{ member.name }}</p>
+              <p class="sub-title">公司：{{ member.group }}</p>
+              <p class="sub-title">从事领域：{{ maintains[member.maintain] }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -37,9 +83,10 @@
 import company from '../api/company'
 import Loader from '../components/Loader'
 import Slider from '../components/Slider'
+import Timeline from '../components/Timeline'
 
 export default {
-  components: { Loader, Slider },
+  components: { Loader, Slider, Timeline },
   data () {
     return {
       loaded: false,
@@ -78,6 +125,7 @@ export default {
         margin-right: 5px
   h3.intro
     margin-top: 50px
+    margin-bottom: 20px !important
     display: inline-block
     margin-left: auto
     margin-right: auto
@@ -86,15 +134,25 @@ export default {
       display: block
       width: 60px
       height: 4px
-      background: #1fc8db
+      background: #a5e9f1
       border-radius: 5px
       margin: 0 auto
       margin-top: 10px
   .intro
     p
       text-indent: 2em
-      position: relative
+      background: #fff
+      padding: 1rem
+      border: 2px solid #a5e9f1
+      border-radius: 5px
+      max-width: 900px
+      margin: 0 auto
   #content
     padding-left: 10px
     padding-right: 10px
+  .card
+    margin-left: auto
+    margin-right: auto
+  .product
+    display: inline-block
 </style>

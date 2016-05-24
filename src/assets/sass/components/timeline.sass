@@ -1,0 +1,61 @@
+.timeline
+  margin: 0
+  padding: 0
+  position: relative
+  &:before
+    content: ''
+    position: absolute
+    top: 0
+    bottom: 0
+    width: 2px
+    background: #a5e9f1
+    left: 22%
+    margin-left: -10px
+    +mobile
+      display: none
+  *
+    box-sizing: border-box
+  > li
+    position: relative
+    +mobile
+      margin-top: 15px
+      border-bottom: 1px solid #1fc8db
+    .time
+      display: block
+      width: 25%
+      padding-right: 3rem
+      position: absolute
+      +mobile
+        width: 100%
+        position: relative
+        padding: 0 0 20px 0
+      span
+        display: block
+        text-align: right
+        font-size: .9em
+        color: #168c99
+        +mobile
+          text-align: left
+    .label
+      margin: 0 0 15px 25%
+      padding-bottom: 1em
+      font-size: 1.2em
+      line-height: 1
+      position: relative
+      border-radius: 5px
+      text-align: left
+      +mobile
+        margin-left: 0
+        margin-bottom: 5px
+        font-size: 1em
+    .node
+      width: 10px
+      height: 10px
+      position: absolute
+      background: #1fc8db
+      border-radius: 50%
+      left: 22%
+      top: 0
+      margin-left: -14px
+      +mobile
+        display: none
