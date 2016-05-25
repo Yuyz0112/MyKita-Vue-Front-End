@@ -5,9 +5,15 @@
       <notification :color="notice.color" v-if="notice.show">{{ notice.msg }}</notification>
       <router-view></router-view>
     </div>
-    <div class="hero-foot" id="footer">
-      <h2 class="title">footer</h2>
-    </div>
+    <footer class="footer" id="footer">
+      <div class="container">
+        <div class="content has-text-centered">
+          <p>
+            <strong>泛娱中国</strong> 版权所有 泛娱文化传媒 联系电话:010-52861286 Copyright@2016 京ICP备16021088号-1
+          </p>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
