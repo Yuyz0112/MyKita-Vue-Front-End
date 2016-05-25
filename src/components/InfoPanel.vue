@@ -113,41 +113,29 @@ export default {
       this.loading = true
       const data = {}
       data[this.modal.type] = this.modal.val
+      data.id = this.authData.id
       if (this.modal.update) {
         // update
         if (this.modal.type === 'password') {
-          user.login({
-            email: this.authData.email,
-            password: this.modal.oldPassword
-          }, (val) => {
-            if (val.id !== undefined && val !== undefined) {
-              user.update(this.authData.id, data, (err) => {
-                if (err) {
-                  this.notice({
-                    show: true,
-                    color: 'is-danger',
-                    msg: '请输入正确的格式'
-                  })
-                } else {
-                  this.notice({
-                    show: true,
-                    color: 'is-success',
-                    msg: '修改成功'
-                  })
-                }
-                this.reset()
+          data.oldPassword = this.modal.oldPassword
+          user.updatePassword(data, (err) => {
+            if (err) {
+              this.notice({
+                show: true,
+                color: 'is-danger',
+                msg: err.response
               })
             } else {
               this.notice({
                 show: true,
-                color: 'is-danger',
-                msg: '旧密码错误'
+                color: 'is-success',
+                msg: '修改成功'
               })
-              this.reset()
             }
+            this.reset()
           })
         } else {
-          user.update(this.authData.id, data, (err) => {
+          user.update(data, (err) => {
             if (!err) {
               this.update(this.modal.type, this.modal.val)
               this.notice({
@@ -167,7 +155,7 @@ export default {
         }
       } else {
         // add
-        user.update(this.authData.id, data, (err) => {
+        user.update(data, (err) => {
           if (!err) {
             this.update(this.modal.type, this.modal.val)
             this.notice({

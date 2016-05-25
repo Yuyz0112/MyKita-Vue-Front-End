@@ -2,7 +2,9 @@ import reqwest from 'reqwest'
 
 const domain = 'https://sails.myriptide.com/company/'
 const apis = {
-  getList: domain + 'getList'
+  getList: domain + 'getList',
+  associate: domain + 'associate',
+  dissociate: domain + 'dissociate'
 }
 
 export default {
@@ -35,7 +37,29 @@ export default {
       withCredentials: true,
       data: data
     })
-    .then(val => callback(val))
+    .then(val => callback(null, val))
+    .catch(e => callback(e))
+  },
+
+  associate (data, callback) {
+    reqwest({
+      url: apis.associate,
+      crossOrigin: true,
+      withCredentials: true,
+      data: data
+    })
+    .then(val => callback(null, val))
+    .catch(e => callback(e))
+  },
+
+  dissociate (data, callback) {
+    reqwest({
+      url: apis.dissociate,
+      crossOrigin: true,
+      withCredentials: true,
+      data: data
+    })
+    .then(val => callback(null, val))
     .catch(e => callback(e))
   }
 }

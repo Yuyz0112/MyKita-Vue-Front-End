@@ -5,7 +5,9 @@ const apis = {
   login: domain + 'login',
   logout: domain + 'logout',
   signup: domain + 'signup',
-  check: domain + 'check'
+  check: domain + 'check',
+  update: domain + 'updateInfo',
+  updatePassword: domain + 'updatePassword'
 }
 
 export default {
@@ -55,12 +57,22 @@ export default {
     })
   },
 
-  update (id, data, callback) {
+  update (data, callback) {
     reqwest({
-      url: domain + id,
+      url: apis.update,
       crossOrigin: true,
       withCredentials: true,
-      method: 'PUT',
+      data: data
+    })
+    .then(val => callback(null))
+    .catch(e => callback(e))
+  },
+
+  updatePassword (data, callback) {
+    reqwest({
+      url: apis.updatePassword,
+      crossOrigin: true,
+      withCredentials: true,
       data: data
     })
     .then(val => callback(null))

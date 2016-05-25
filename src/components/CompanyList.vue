@@ -18,6 +18,8 @@
                 <br>
                 位置：{{ company.location }}
               </p>
+              <a class="button is-primary is-outlined" @click="bind(company.id)">认领</a>
+              <a class="button is-danger is-outlined" @click="unbind(company.id)">解除</a>
             </div>
           </div>
         </article>
@@ -39,9 +41,41 @@ export default {
   created () {
     company.getList({
       page: 1
-    }, (val) => {
-      this.companies = val
+    }, (err, val) => {
+      if (!err) {
+        this.companies = val
+      } else {
+        console.log(err)
+      }
     })
+  },
+  vuex: {
+    getters: {
+      session: state => state.session,
+      authData: state => state.authData
+    }
+  },
+  methods: {
+    bind (cid) {
+      company.associate({
+        uid: this.authData.id,
+        cid: cid
+      }, (err) => {
+        if (err) {
+          console.log(err)
+        }
+      })
+    },
+    unbind (cid) {
+      company.dissociate({
+        uid: this.authData.id,
+        cid: cid
+      }, (err) => {
+        if (err) {
+          console.log(err)
+        }
+      })
+    }
   }
 }
 </script>
