@@ -5,8 +5,8 @@
       <h2 class="subtitle has-text-centered">{{ msg }}</h2>
     </div>
   </section>
-  <div class="columns is-multiline container is-mobile">
-    <div class="column" v-for="news of lists">
+  <div v-if="loaded" class="row is-multiline container is-clearfix" transition="fade">
+    <div class="col" :class="mobile? '':'is-4'" v-for="news of lists">
       <div class="card">
         <div class="card-image">
           <figure class="image is-16by9" :style="{ background: `url(${news.thumb})`, backgroundSize: 'cover' }">
@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import { getSession } from '../vuex/getters'
 import news from '../api/news'
 
 export default {
@@ -35,29 +34,29 @@ export default {
         page: 1,
         limit: 15
       },
-      lists: []
+      lists: [],
+      loaded: false
     }
   },
   vuex: {
     getters: {
-      session: getSession
+      mobile: state => state.mobile,
+      session: state => state.session
     }
   },
   created () {
-    news.getList(this.pagination, (err, lists) => {
-      if (lists) {
-        this.lists = lists
-      } else {
-        console.log(err)
-      }
-    })
+    this.get()
   },
   methods: {
     loadMore () {
       this.pagination.page++
+      this.get()
+    },
+    get () {
       news.getList(this.pagination, (err, lists) => {
         if (lists) {
           this.lists = this.lists.concat(lists)
+          this.loaded = true
         } else {
           console.log(err)
         }
@@ -68,10 +67,15 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+  .row
+    width: 100%
   .container
     margin: 0 auto
-    .column
-      max-width: 100%
+    .col
+      padding: 10px
+      float: left
+      &.is-4
+        width: 33.33%
     .card
       max-width: 100%
       width: 350px
