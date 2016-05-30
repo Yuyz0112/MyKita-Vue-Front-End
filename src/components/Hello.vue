@@ -1,7 +1,8 @@
 <template>
   <div class="hello">
     <h1 @mouseover="hovered = true"
-        @mouseout="hovered = false">{{ hovered }}</h1>
+        @mouseout="hovered = false"
+        :data-role="hovered? 'role-1':'role-2'">{{ hovered }}</h1>
     <ul>
       <template v-for="_obj in myObj">
         <li>{{ $key }}</li>
@@ -20,6 +21,7 @@
         </ul>
       </template>
     </ul>
+    <p>{{ test }}</p>
   </div>
 </template>
 
@@ -39,6 +41,14 @@ export default {
             b3: 'value B'
           }
         }
+      }
+    }
+  },
+  props: {
+    room: {
+      type: Object,
+      default: () => {
+        return {}
       }
     }
   }

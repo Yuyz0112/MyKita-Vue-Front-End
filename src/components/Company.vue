@@ -13,7 +13,7 @@
           <p class="time">成立于：{{ company.established }}</p>
           <p class="is-clearfix">
             <span class="tag is-primary is-pulled-left">{{ maintains[company.defaultTag] }}</span>
-            <span v-for="tag of company.customerTag" class="tag is-primary is-pulled-left">{{ tag }}</span>
+            <span v-if="company.customerTag[0]" v-for="tag of company.customerTag" class="tag is-primary is-pulled-left">{{ tag }}</span>
           </p>
           <p>位置：{{ company.location }}</p>
         </div>

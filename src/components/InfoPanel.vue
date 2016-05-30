@@ -33,7 +33,7 @@
           <p class="control">
             <span class="select">
               <select v-el:select @change="this.modal.val = this.$els.select.selectedIndex">
-                <option v-for="maintain of maintains">{{ maintain }}</option>
+                <option v-for="maintain of maintains" :selected="$index === company.defaultTag">{{ maintain }}</option>
               </select>
             </span>
           </p>
