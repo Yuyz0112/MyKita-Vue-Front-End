@@ -13,7 +13,7 @@
           <p class="time">成立于：{{ company.established }}</p>
           <p class="is-clearfix">
             <span class="tag is-primary is-pulled-left">{{ maintains[company.defaultTag] }}</span>
-            <span v-if="company.customerTag[0]" v-for="tag of company.customerTag" class="tag is-primary is-pulled-left">{{ tag }}</span>
+            <span v-if="company.customerTag[0]" v-for="tag of company.customerTag" track-by="$index" class="tag is-primary is-pulled-left">{{ tag }}</span>
           </p>
           <p>位置：{{ company.location }}</p>
         </div>
@@ -31,16 +31,16 @@
       </div>
     </div>
     <div class="columns">
-      <div class="column" v-if="company.images">
+      <div class="column" v-if="company.images.length">
         <h3 class="title intro">图片展示</h3>
         <slider :images="company.images"></slider>
       </div>
-      <div class="column" v-if="company.timeline">
+      <div class="column" v-if="company.timeline.length">
         <h3 class="title intro">重要动态</h3>
         <timeline :timeline="company.timeline"></timeline>
       </div>
     </div>
-    <div v-if="company.products">
+    <div v-if="company.products.bicodes.length || company.products.links.length">
       <h3 class="title intro">产品链接</h3>
       <div class="has-text-centered">
         <figure v-for="bicode of company.products.bicodes" class="image is-128x128 product">

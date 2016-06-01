@@ -9,7 +9,7 @@
     <div class="col" :class="mobile? '':'is-4'" v-for="news of lists">
       <div class="card">
         <div class="card-image">
-          <figure class="image is-16by9" :style="{ background: `url(${news.thumb})`, backgroundSize: 'cover' }">
+          <figure class="image is-16by9" :style="{ background: 'url(' + news.thumb + ')', backgroundSize: 'cover' }">
           </figure>
         </div>
         <div class="card-content">
